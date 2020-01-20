@@ -6,17 +6,12 @@ from scipy import signal
 
 raw_data = 'D:/Jason/Desktop/GRC Flows/rf socket_ch1 and ch3_17Jan2020.dat'
 f = scipy.fromfile(open(raw_data), dtype = scipy.float32)
-#trim the input for development
-#f = f[19300000:20330000]
+#f = f[19300000:20330000] #subset of total signal showing 4 identical pulses, for development
 print('{} data points imported'.format(len(f)))
-#looks like ~389 symbols per second (baud)
-#"finite difference" or "discrete difference" is a rough estimate of derivative
 
 fs = 2.4e6 #sample rate
 f0 = 433e6 #carrier wave freq
 fbaud = 6000 #symbols per second
-lowcut = 100e6 #low cutoff freq (Hz)
-highcut = 650e6 #high cutoff freq (Hz)
 
 nsamples = len(f)
 T = nsamples/fs
@@ -25,7 +20,7 @@ t = np.linspace(0, T, nsamples, endpoint=False)
 #create an envelope detector and then low-pass filter, taken from https://www.allaboutcircuits.com/technical-articles/fsk-explained-with-python/
 y_diff = np.diff(f[:nsamples]) #generate 1st derivative of the signal
 f = None
-print('Derivative of data calculated')
+#print('Derivative of data calculated')
 
 #downsample by a factor of 100 (tried 100  still has 20 points for the short pulse, but 200, 500, and 1000 didn't have enough points)
 #a couple of (didn't record citation...) posts on web suggested repeated decimation if you're doing more than 10-15.
@@ -45,7 +40,7 @@ t_dec = np.linspace(0, T_dec, nsamples_dec, endpoint = False)
 messages = []
 mean_sig = np.mean(np.abs(y_decimated))
 breaks = {0}
-crit_len = 4 #num samples of no pulse to split signal at
+crit_len = 4 #num samples of no-pulse to split signal at
 message_len = 0
 silence_len = 0
 for count in range(nsamples_dec):
@@ -73,24 +68,23 @@ envs = []
 
 for message in messages:
     y_hilbert = signal.signaltools.hilbert(message)
-    #hilberts.append(y_hilbert)
-    print('Hilbert transform completed; analytic signal extracted')
+    #print('Hilbert transform completed; analytic signal extracted')
     y_env = np.abs(y_hilbert)
     y_hilbert = None
     envs.append(y_env)
     y_env = None
-    print('Baseband envelope calculated')
+    #print('Baseband envelope calculated')
 
-h = signal.firwin(numtaps = int(fbaud_dec), cutoff = fbaud_dec * 2, fs = fs_dec)  #using new decimation-corrected fbauds and fs's
+h = signal.firwin(numtaps = int(fbaud_dec), cutoff = fbaud_dec * 2, fs = fs_dec)  #using new, decimation-corrected fbauds and fs's
 
 messages = None
 data = []
 
 for env in envs:
     y_filtered = signal.lfilter(h, 1.0, env)
-    print('FIR filter applied')
+    #print('FIR filter applied')
     y_filtered_dig = np.round(y_filtered / max(y_filtered))
-    print('Samples digitized to 0s and 1s')
+    #print('Samples digitized to 0s and 1s')
     y_filtered = None
     data.append(y_filtered_dig)
     y_filtered_dig = None
@@ -106,14 +100,14 @@ for message in data:
     for i in range(len(message)):
         last = message[max(0, i-1)]
         if message[i] <= last and sleep_flag:
-            continue #sleep until either there's a rising edge or sleep_flag is false (i.e. we're decode)
+            continue #sleep until either there's a rising edge or sleep_flag is false (i.e. we're decoding)
         elif message[i] < last and not sleep_flag: #detect a falling edge while decoding
             sleep_flag = True
-            decoded = decoded * 2 #left shift wasn't working reliably?
+            decoded = decoded * 2 #tried bitwise leftshift, but it wasn't working reliably?
             if pulse_len > short_len * 2: #long pulse detected, decode as a 1
                 decoded = decoded + 1
             else:
-                decoded = decoded + 0
+                decoded = decoded + 0 #short pulse detected, decode as a 0
             pulse_len = 0
             continue
         sleep_flag = False
