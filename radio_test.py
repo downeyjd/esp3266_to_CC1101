@@ -1,9 +1,7 @@
 import scipy
 import numpy as np
-import matplotlib as mp
 import matplotlib.pyplot as plt
 from scipy import signal
-from scipy import fft
 
 
 raw_data = 'D:/Jason/Desktop/GRC Flows/rf socket_ch1 and ch3_17Jan2020.dat'
@@ -30,6 +28,7 @@ f = None
 print('Derivative of data calculated')
 
 #downsample by a factor of 100 (tried 100  still has 20 points for the short pulse, but 200, 500, and 1000 didn't have enough points)
+#a couple of (didn't record citation...) posts on web suggested repeated decimation if you're doing more than 10-15.
 y_decimated = signal.decimate(signal.decimate(y_diff, 10), 10)
 y_diff = None
 print('Data downsampled to {} samples'.format(len(y_decimated)))
