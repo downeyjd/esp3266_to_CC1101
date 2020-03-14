@@ -1,0 +1,277 @@
+#define PATABLE        0x3E  // PA Table start address
+#define IOCFG2         0x00  // GDO2 Output Pin Configuration
+#define IOCFG1         0x01  // GDO1 Output Pin Configuration
+#define IOCFG0         0x02  // GDO0 Output Pin Configuration
+#define FIFOTHR        0x03  // RX FIFO and TX FIFO Thresholds
+#define SYNC1          0x04  // Sync Word, High Byte
+#define SYNC0          0x05  // Sync Word, Low Byte
+#define PKTLEN         0x06  // Packet Length
+#define PKTCTRL1       0x07  // Packet Automation Control
+#define PKTCTRL0       0x08  // Packet Automation Control
+#define ADDR           0x09  // Device Address
+#define CHANNR         0x0A  // Channel Number
+#define FSCTRL1        0x0B  // Frequency Synthesizer Control
+#define FSCTRL0        0x0C  // Frequency Synthesizer Control
+#define FREQ2          0x0D  // Frequency Control Word, High Byte
+#define FREQ1          0x0E  // Frequency Control Word, Middle Byte
+#define FREQ0          0x0F  // Frequency Control Word, Low Byte
+#define MDMCFG4        0x10  // Modem Configuration
+#define MDMCFG3        0x11  // Modem Configuration
+#define MDMCFG2        0x12  // Modem Configuration
+#define MDMCFG1        0x13  // Modem Configuration
+#define MDMCFG0        0x14  // Modem Configuration
+#define DEVIATN        0x15  // Modem Deviation Setting
+#define MCSM2          0x16  // Main Radio Control State Machine Configuration
+#define MCSM1          0x17  // Main Radio Control State Machine Configuration
+#define MCSM0          0x18  // Main Radio Control State Machine Configuration
+#define FOCCFG         0x19  // Frequency Offset Compensation Configuration
+#define BSCFG          0x1A  // Bit Synchronization Configuration
+#define AGCCTRL2       0x1B  // AGC Control
+#define AGCCTRL1       0x1C  // AGC Control
+#define AGCCTRL0       0x1D  // AGC Control
+#define WOREVT1        0x1E  // High Byte Event0 Timeout
+#define WOREVT0        0x1F  // Low Byte Event0 Timeout
+#define WORCTRL        0x20  // Wake On Radio Control
+#define FREND1         0x21  // Front End RX Configuration
+#define FREND0         0x22  // Front End TX Configuration
+#define FSCAL3         0x23  // Frequency Synthesizer Calibration
+#define FSCAL2         0x24  // Frequency Synthesizer Calibration
+#define FSCAL1         0x25  // Frequency Synthesizer Calibration
+#define FSCAL0         0x26  // Frequency Synthesizer Calibration
+#define RCCTRL1        0x27  // RC Oscillator Configuration
+#define RCCTRL0        0x28  // RC Oscillator Configuration
+#define FSTEST         0x29  // Frequency Synthesizer Calibration Control
+#define PTEST          0x2A  // Production Test
+#define AGCTEST        0x2B  // AGC Test
+#define TEST2          0x2C  // Various Test Settings
+#define TEST1          0x2D  // Various Test Settings
+#define TEST0          0x2E  // Various Test Settings
+#define PARTNUM        0x30  // Chip ID
+#define VERSION        0x31  // Chip ID
+#define FREQEST        0x32  // Frequency Offset Estimate from Demodulator
+#define LQI            0x33  // Demodulator Estimate for Link Quality
+#define RSSI           0x34  // Received Signal Strength Indication
+#define MARCSTATE      0x35  // Main Radio Control State Machine State
+#define WORTIME1       0x36  // High Byte of WOR Time
+#define WORTIME0       0x37  // Low Byte of WOR Time
+#define PKTSTATUS      0x38  // Current GDOx Status and Packet Status
+#define VCO_VC_DAC     0x39  // Current Setting from PLL Calibration Module
+#define TXBYTES        0x3A  // Underflow and Number of Bytes
+#define RXBYTES        0x3B  // Overflow and Number of Bytes
+#define RCCTRL1_STATUS 0x3C  // Last RC Oscillator Calibration Result
+#define RCCTRL0_STATUS 0x3D  // Last RC Oscillator Calibration Result
+
+
+cc1101.write(b'\x00\x29')
+cc1101.write(b'\x01\x2E')
+cc1101.write(b'\x02\x06')
+cc1101.write(b'\x03\x07')
+cc1101.write(b'\x04\xD3')
+cc1101.write(b'\x05\x91')
+cc1101.write(b'\x06\x05')
+cc1101.write(b'\x07\x00')
+cc1101.write(b'\x08\x00')
+cc1101.write(b'\x09\x00')
+cc1101.write(b'\x0A\x00')
+cc1101.write(b'\x0B\x06')
+cc1101.write(b'\x0C\x00')
+cc1101.write(b'\x0D\x10')
+cc1101.write(b'\x0E\xA7')
+cc1101.write(b'\x0F\x62')
+cc1101.write(b'\x10\x27')
+cc1101.write(b'\x11\xE4')
+cc1101.write(b'\x12\x30')
+cc1101.write(b'\x13\x02')
+cc1101.write(b'\x14\xF8')
+cc1101.write(b'\x15\x15')
+cc1101.write(b'\x16\x07')
+cc1101.write(b'\x17\x30')
+cc1101.write(b'\x18\x18')
+cc1101.write(b'\x19\x16')
+cc1101.write(b'\x1A\x6C')
+cc1101.write(b'\x1B\x03')
+cc1101.write(b'\x1C\x00')
+cc1101.write(b'\x1D\x91')
+cc1101.write(b'\x1E\x87')
+cc1101.write(b'\x1F\x6B')
+cc1101.write(b'\x20\xFB')
+cc1101.write(b'\x21\xB6')
+cc1101.write(b'\x22\x11')
+cc1101.write(b'\x23\xE9')
+cc1101.write(b'\x24\x2A')
+cc1101.write(b'\x25\x00')
+cc1101.write(b'\x26\x1F')
+cc1101.write(b'\x27\x41')
+cc1101.write(b'\x28\x00')
+cc1101.write(b'\x29\x59')
+cc1101.write(b'\x2A\x7F')
+cc1101.write(b'\x2B\x3F')
+cc1101.write(b'\x2C\x88')
+cc1101.write(b'\x2D\x31')
+cc1101.write(b'\x2E\x09')
+##cc1101.write([PATABLE 0x3E | burst write 0x40][string of bytes for PATABLE, just need two, \x00\x60])
+cc1101.write(b'\x7E\x00\x60')
+
+
+cc1101_write_register(IOCFG2,         0x29);
+cc1101_write_register(IOCFG1,         0x2E);
+cc1101_write_register(IOCFG0,         0x06);
+cc1101_write_register(FIFOTHR,        0x07);
+cc1101_write_register(SYNC1,          0xD3);
+cc1101_write_register(SYNC0,          0x91);
+cc1101_write_register(PKTLEN,         0x05);
+cc1101_write_register(PKTCTRL1,       0x00);
+cc1101_write_register(PKTCTRL0,       0x00);
+cc1101_write_register(ADDR,           0x00);
+cc1101_write_register(CHANNR,         0x00);
+cc1101_write_register(FSCTRL1,        0x06);
+cc1101_write_register(FSCTRL0,        0x00);
+cc1101_write_register(FREQ2,          0x10);
+cc1101_write_register(FREQ1,          0xA7);
+cc1101_write_register(FREQ0,          0x62);
+cc1101_write_register(MDMCFG4,        0x27);
+cc1101_write_register(MDMCFG3,        0xE4);
+cc1101_write_register(MDMCFG2,        0x30);
+cc1101_write_register(MDMCFG1,        0x02);
+cc1101_write_register(MDMCFG0,        0xF8);
+cc1101_write_register(DEVIATN,        0x15);
+cc1101_write_register(MCSM2,          0x07);
+cc1101_write_register(MCSM1,          0x30);
+cc1101_write_register(MCSM0,          0x18);
+cc1101_write_register(FOCCFG,         0x16);
+cc1101_write_register(BSCFG,          0x6C);
+cc1101_write_register(AGCCTRL2,       0x03);
+cc1101_write_register(AGCCTRL1,       0x00);
+cc1101_write_register(AGCCTRL0,       0x91);
+cc1101_write_register(WOREVT1,        0x87);
+cc1101_write_register(WOREVT0,        0x6B);
+cc1101_write_register(WORCTRL,        0xFB);
+cc1101_write_register(FREND1,         0xB6);
+cc1101_write_register(FREND0,         0x11);
+cc1101_write_register(FSCAL3,         0xE9);
+cc1101_write_register(FSCAL2,         0x2A);
+cc1101_write_register(FSCAL1,         0x00);
+cc1101_write_register(FSCAL0,         0x1F);
+cc1101_write_register(RCCTRL1,        0x41);
+cc1101_write_register(RCCTRL0,        0x00);
+cc1101_write_register(FSTEST,         0x59);
+cc1101_write_register(PTEST,          0x7F);
+cc1101_write_register(AGCTEST,        0x3F);
+cc1101_write_register(TEST2,          0x88);
+cc1101_write_register(TEST1,          0x31);
+cc1101_write_register(TEST0,          0x09);
+cc1101_write_register(PATABLE,        0x0060);
+
+// RF settings for CC1101
+
+typedef struct {
+    uint8 iocfg2;           // GDO2 Output Pin Configuration
+    uint8 iocfg1;           // GDO1 Output Pin Configuration
+    uint8 iocfg0;           // GDO0 Output Pin Configuration
+    uint8 fifothr;          // RX FIFO and TX FIFO Thresholds
+    uint8 sync1;            // Sync Word, High Byte
+    uint8 sync0;            // Sync Word, Low Byte
+    uint8 pktlen;           // Packet Length
+    uint8 pktctrl1;         // Packet Automation Control
+    uint8 pktctrl0;         // Packet Automation Control
+    uint8 addr;             // Device Address
+    uint8 channr;           // Channel Number
+    uint8 fsctrl1;          // Frequency Synthesizer Control
+    uint8 fsctrl0;          // Frequency Synthesizer Control
+    uint8 freq2;            // Frequency Control Word, High Byte
+    uint8 freq1;            // Frequency Control Word, Middle Byte
+    uint8 freq0;            // Frequency Control Word, Low Byte
+    uint8 mdmcfg4;          // Modem Configuration
+    uint8 mdmcfg3;          // Modem Configuration
+    uint8 mdmcfg2;          // Modem Configuration
+    uint8 mdmcfg1;          // Modem Configuration
+    uint8 mdmcfg0;          // Modem Configuration
+    uint8 deviatn;          // Modem Deviation Setting
+    uint8 mcsm2;            // Main Radio Control State Machine Configuration
+    uint8 mcsm1;            // Main Radio Control State Machine Configuration
+    uint8 mcsm0;            // Main Radio Control State Machine Configuration
+    uint8 foccfg;           // Frequency Offset Compensation Configuration
+    uint8 bscfg;            // Bit Synchronization Configuration
+    uint8 agcctrl2;         // AGC Control
+    uint8 agcctrl1;         // AGC Control
+    uint8 agcctrl0;         // AGC Control
+    uint8 worevt1;          // High Byte Event0 Timeout
+    uint8 worevt0;          // Low Byte Event0 Timeout
+    uint8 worctrl;          // Wake On Radio Control
+    uint8 frend1;           // Front End RX Configuration
+    uint8 frend0;           // Front End TX Configuration
+    uint8 fscal3;           // Frequency Synthesizer Calibration
+    uint8 fscal2;           // Frequency Synthesizer Calibration
+    uint8 fscal1;           // Frequency Synthesizer Calibration
+    uint8 fscal0;           // Frequency Synthesizer Calibration
+    uint8 rcctrl1;          // RC Oscillator Configuration
+    uint8 rcctrl0;          // RC Oscillator Configuration
+    uint8 fstest;           // Frequency Synthesizer Calibration Control
+    uint8 ptest;            // Production Test
+    uint8 agctest;          // AGC Test
+    uint8 test2;            // Various Test Settings
+    uint8 test1;            // Various Test Settings
+    uint8 test0;            // Various Test Settings
+    uint8 partnum;          // Chip ID
+    uint8 version;          // Chip ID
+    uint8 freqest;          // Frequency Offset Estimate from Demodulator
+    uint8 lqi;              // Demodulator Estimate for Link Quality
+    uint8 rssi;             // Received Signal Strength Indication
+    uint8 marcstate;        // Main Radio Control State Machine State
+    uint8 wortime1;         // High Byte of WOR Time
+    uint8 wortime0;         // Low Byte of WOR Time
+    uint8 pktstatus;        // Current GDOx Status and Packet Status
+    uint8 vco_vc_dac;       // Current Setting from PLL Calibration Module
+    uint8 txbytes;          // Underflow and Number of Bytes
+    uint8 rxbytes;          // Overflow and Number of Bytes
+    uint8 rcctrl1_status;   // Last RC Oscillator Calibration Result
+    uint8 rcctrl0_status;   // Last RC Oscillator Calibration Result
+} RF_SETTINGS;
+
+0x29,  # IOCFG2
+0x2E,  # IOCFG1
+0x06,  # IOCFG0
+0x07,  # FIFOTHR
+0xD3,  # SYNC1
+0x91,  # SYNC0
+0x05,  # PKTLEN
+0x00,  # PKTCTRL1
+0x00,  # PKTCTRL0
+0x00,  # ADDR
+0x00,  # CHANNR
+0x06,  # FSCTRL1
+0x00,  # FSCTRL0
+0x10,  # FREQ2
+0xA7,  # FREQ1
+0x62,  # FREQ0
+0x27,  # MDMCFG4
+0xE4,  # MDMCFG3
+0x30,  # MDMCFG2
+0x02,  # MDMCFG1
+0xF8,  # MDMCFG0
+0x15,  # DEVIATN
+0x07,  # MCSM2
+0x30,  # MCSM1
+0x18,  # MCSM0
+0x16,  # FOCCFG
+0x6C,  # BSCFG
+0x03,  # AGCCTRL2
+0x00,  # AGCCTRL1
+0x91,  # AGCCTRL0
+0x87,  # WOREVT1
+0x6B,  # WOREVT0
+0xFB,  # WORCTRL
+0xB6,  # FREND1
+0x11,  # FREND0
+0xE9,  # FSCAL3
+0x2A,  # FSCAL2
+0x00,  # FSCAL1
+0x1F,  # FSCAL0
+0x41,  # RCCTRL1
+0x00,  # RCCTRL0
+0x59,  # FSTEST
+0x7F,  # PTEST
+0x3F,  # AGCTEST
+0x88,  # TEST2
+0x31,  # TEST1
+0x09,  # TEST0
