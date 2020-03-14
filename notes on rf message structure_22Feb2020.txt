@@ -1,0 +1,45 @@
+10111010000101110000(20bits)    0101 0nil <- 1 on
+10111010000101110000            1101 0nil <- 1 off
+10111010000101110000            1001 0nil <- 3 on
+10111010000101110000            0001 0nil <- 3 off
+                                1011 0nil <- 2 off
+                                0011 0nil <- 2 on
+
+switch 1:
+    on:     0x8E, 0x8E
+    off:    0xEE, 0x8E
+switch 2:
+    on:     0x88, 0xEE
+    off:    0xE8, 0xEE
+switch 3:
+    on:     0xE8, 0x8E
+    off:    0x88, 0x8E
+four OOK PWM encoded messages, in pairs, one on, one off
+1011101000010111000001010
+each 1/0 represents a pulse shape.  pulse is shaped in binary with 7 LSBs.  the MSB overlaps with the LSB of the preceding byte.
+0x60 = 0 (0b0110 0000)
+0b78 = 1 (0b0111 1000)
+
+or
+0x80
+0xE0
+b'\x7f\xE8\xEE\xE8\xE8\x88' first 10 symbols of the code
+first 20 bits are the same
+"00" = 0x88
+"10" = 0xE8
+"01" = 0x8E
+"11" = 0xEE
+preamble + FIFO address = b'\x7f\xE8\xEE\xE8\xE8\x88\x8E\x8E\xEE\x88\x88'
+1011101000010111000001010
+switch 1 on code = b'\x8E\x8E\x80'
+1.7297833333333333333333333333333 ms / pulse
+578 pulses per second
+1734.3212541069690809060865040901 on/offs per second
+
+38.0264 - 38.4664 ms for short pulse on (0.44ms)
+38.4664 - 39.7549 ms for short pulse off (1.2885ms)
+34.5695 - 35.8580 ms for long pulse on (1.2885ms)
+35.8580 - 36.2979 ms for long pulse off (0.4399ms)
+
+currently set at 9600 pulses per second
+16.6x higher
